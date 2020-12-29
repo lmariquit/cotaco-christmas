@@ -57,6 +57,9 @@ export default {
         }
       ]
     }
+  },
+  created() {
+    // fetch data for all wishlists
   }
 }
 </script>
@@ -77,5 +80,6 @@ export default {
   border: 1px solid #39495c;
   border-radius: 1.5rem;
   font-size: 14px;
+  text-align: center;
 }
 </style>

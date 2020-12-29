@@ -1,5 +1,5 @@
 <template>
-  <div class="user-card-small">
+  <router-link class="user-card-small" to="/wishlists/8419989">
     <BaseButton>
       <template v-slot:left>
         <!-- imgSmall Not working... -->
@@ -15,7 +15,7 @@
         >
       </template>
     </BaseButton>
-  </div>
+  </router-link>
 </template>
 
 <script>
