@@ -19,23 +19,74 @@
 
     <template v-slot:user-wishlist>
       <div class="user-wishlist">
-        Wishlist Here
+        <WishlistItemSmall
+          v-for="wishlistItem in wishlistItems"
+          :key="wishlistItem.key"
+          :name="wishlistItem.displayName || wishlistItem.name"
+          :purchased="wishlistItem.purchased"
+        />
       </div>
     </template>
   </BaseProfile>
 </template>
+
 <script>
 import BaseProfile from '@/components/BaseProfile.vue'
+import WishlistItemSmall from '@/components/WishlistItemSmall.vue'
 
 export default {
   name: 'Profile',
   components: {
-    BaseProfile
+    BaseProfile,
+    WishlistItemSmall
   },
   data() {
     return {
       event: null,
-      id: 8419989 //Hardcoded for now
+      id: 8419989, //Hardcoded for now
+      wishlistItems: [
+        {
+          id: 0,
+          name: 'Mini Smart Plug That Has A long Name',
+          displayName: 'Mini Smart Plug',
+          additionalDetails: 'white',
+          estCost: 18.53,
+          url: 'http://www.google.com',
+          purchased: false
+        },
+        {
+          id: 1,
+          name: 'Essential Oils Gift Set By Pollywhirl Has A long Name',
+          additionalDetails: 'blue',
+          estCost: 50.99,
+          url: 'http://www.google.com',
+          purchased: true
+        },
+        {
+          id: 2,
+          name: 'Baseball bat',
+          additionalDetails: 'blue',
+          estCost: 50.99,
+          url: 'http://www.google.com',
+          purchased: false
+        },
+        {
+          id: 3,
+          name: 'Perfum',
+          additionalDetails: 'blue',
+          estCost: 50.99,
+          url: 'http://www.google.com',
+          purchased: true
+        },
+        {
+          id: 4,
+          name: 'Man i dont knwo but its a lot of text here',
+          additionalDetails: 'blue',
+          estCost: 50.99,
+          url: 'http://www.google.com',
+          purchased: true
+        }
+      ]
     }
   },
   created() {
