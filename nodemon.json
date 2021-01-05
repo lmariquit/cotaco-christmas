@@ -1,5 +1,5 @@
 {
   "watch": [
-    "src/server"
+    "src/server/api.js"
   ]
 }
