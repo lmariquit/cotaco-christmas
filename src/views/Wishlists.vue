@@ -20,7 +20,7 @@
 // @ is an alias to /src
 // import UserCard from '@/components/UserCard.vue'
 import UserCardSmall from '@/components/UserCardSmall.vue'
-import axios from 'axios'
+import EventService from '@/services/EventService.js'
 
 export default {
   name: 'Wishlists',
@@ -33,8 +33,7 @@ export default {
     }
   },
   created() {
-    axios
-      .get('/api/users')
+    EventService.getUsers()
       .then(response => {
         this.users = response.data
         console.log('events:', response.data)
