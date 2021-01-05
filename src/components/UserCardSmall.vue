@@ -11,7 +11,7 @@
       </template>
       <template v-slot:default>
         <span class="user-card-small__name"
-          >{{ shortName }} {{ lastName }}</span
+          >{{ shortName || firstName }} {{ lastName }}</span
         >
       </template>
     </BaseButton>
@@ -27,6 +27,10 @@ export default {
     BaseButton
   },
   props: {
+    firstName: {
+      type: String,
+      required: false
+    },
     shortName: {
       type: String,
       required: true
