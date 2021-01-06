@@ -9,8 +9,11 @@
     <UserCardSmall
       v-for="user in users"
       :key="user.id"
+      :userId="user.id"
+      :firstName="user.firstName"
       :shortName="user.shortName"
       :lastName="user.lastName"
+      :profileMessage="user.profileMessage"
     />
   </div>
 </template>
@@ -19,6 +22,7 @@
 // @ is an alias to /src
 // import UserCard from '@/components/UserCard.vue'
 import UserCardSmall from '@/components/UserCardSmall.vue'
+import EventService from '@/services/EventService.js'
 
 export default {
   name: 'Wishlists',
@@ -27,39 +31,18 @@ export default {
   },
   data() {
     return {
-      users: [
-        {
-          id: 8419989,
-          firstName: 'kathleen',
-          lastName: 'mari',
-          family: 'mari',
-          shortName: 'katie',
-          age: '26',
-          gender: 'female'
-        },
-        {
-          id: 8419979,
-          firstName: 'joseph',
-          lastName: 'cota',
-          family: 'alba',
-          shortName: 'joe',
-          age: '39',
-          gender: 'male'
-        },
-        {
-          id: 8419969,
-          firstName: 'imelda',
-          lastName: 'mari',
-          family: 'mari',
-          shortName: 'mhel',
-          age: '54',
-          gender: 'female'
-        }
-      ]
+      users: null
     }
   },
   created() {
-    // fetch data for all wishlists
+    EventService.getUsers()
+      .then(res => {
+        this.users = res.data
+        console.log('events:', res.data)
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 }
 </script>
