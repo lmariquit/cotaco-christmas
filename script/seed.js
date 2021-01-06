@@ -18,7 +18,6 @@ async function seed() {
       isAdmin: true,
       title: 'ditche',
       selection: null,
-      profileMessage: "Hi I'm kates",
       photo: 'https://odadee.net/themes/default/assets/images/default.jpg',
       photoSmall: 'https://odadee.net/themes/default/assets/images/default.jpg',
       email: 'cody@email.com'
@@ -96,6 +95,47 @@ async function seed() {
       photo:
         'https://images-na.ssl-images-amazon.com/images/I/51OGcAjwIDL._SX404_BO1,204,203,200_.jpg',
       userId: 1
+    }),
+    Product.create({
+      name: 'Mini Smart Plug That Has A long Name',
+      description: 'Mini Smart Plug',
+      additionalDetails: 'white',
+      estCost: 18.53,
+      url: 'http://www.google.com',
+      purchased: false,
+      userId: 1
+    }),
+    Product.create({
+      name: 'Essential Oils Gift Set By Pollywhirl Has A long Name',
+      description: 'blue',
+      estCost: 50.99,
+      url: 'http://www.google.com',
+      purchased: true,
+      userId: 1
+    }),
+    Product.create({
+      name: 'Baseball bat',
+      description: 'blue',
+      estCost: 50.99,
+      url: 'http://www.google.com',
+      purchased: false,
+      userId: 3
+    }),
+    Product.create({
+      name: 'Perfum',
+      description: 'blue',
+      estCost: 50.99,
+      url: 'http://www.google.com',
+      purchased: true,
+      userId: 1
+    }),
+    Product.create({
+      name: 'Man i dont knwo but its a lot of text here',
+      description: 'blue',
+      estCost: 50.99,
+      url: 'http://www.google.com',
+      purchased: true,
+      userId: 3
     })
   ])
 

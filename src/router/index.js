@@ -24,8 +24,9 @@ const routes = [
     component: Wishlists
   },
   {
-    path: '/wishlists/8419989',
+    path: '/wishlists/:userId',
     name: 'Profile',
+    props: true,
     component: Profile
   }
 ]

@@ -8,7 +8,7 @@ const Product = db.define('product', {
   },
   shortName: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   estCost: {
     type: Sequelize.DECIMAL(10, 2),

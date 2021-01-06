@@ -1,5 +1,11 @@
 <template>
-  <router-link class="user-card-small" to="/wishlists/8419989">
+  <router-link
+    class="user-card-small"
+    :to="{
+      name: 'Profile',
+      params: { userId, firstName, shortName, lastName, profileMessage }
+    }"
+  >
     <BaseButton>
       <template v-slot:left>
         <!-- imgSmall Not working... -->
@@ -27,17 +33,25 @@ export default {
     BaseButton
   },
   props: {
+    userId: {
+      type: Number,
+      required: true
+    },
     firstName: {
       type: String,
       required: false
     },
     shortName: {
       type: String,
-      required: true
+      required: false
     },
     lastName: {
       type: String,
       required: true
+    },
+    profileMessage: {
+      type: String,
+      required: false
     }
     // ,
     // imgSmall: {

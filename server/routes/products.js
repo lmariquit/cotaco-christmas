@@ -12,6 +12,19 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/:userId', async (req, res, next) => {
+  try {
+    const userProducts = await Product.findAll({
+      where: {
+        userId: req.params.userId
+      }
+    })
+    res.json(userProducts)
+  } catch (err) {
+    next(err)
+  }
+})
+
 // // api/products/categories
 // router.get('/categories', async (req, res, next) => {
 //   try {

@@ -9,9 +9,11 @@
     <UserCardSmall
       v-for="user in users"
       :key="user.id"
+      :userId="user.id"
       :firstName="user.firstName"
       :shortName="user.shortName"
       :lastName="user.lastName"
+      :profileMessage="user.profileMessage"
     />
   </div>
 </template>
@@ -34,9 +36,9 @@ export default {
   },
   created() {
     EventService.getUsers()
-      .then(response => {
-        this.users = response.data
-        console.log('events:', response.data)
+      .then(res => {
+        this.users = res.data
+        console.log('events:', res.data)
       })
       .catch(error => {
         console.log(error)

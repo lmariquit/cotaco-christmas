@@ -9,11 +9,12 @@
     </template>
 
     <template v-slot:msg-bubble>
-      <div class="msg-bubble">Message Bubble Here</div>
+      <div v-if="profileMessage" class="msg-bubble">{{ profileMessage }}</div>
+      <div v-else class="msg-bubble">Message Bubble Here</div>
     </template>
 
     <template v-slot:user-title>
-      <span class="wishlist-header__owner">Katies Wishlist</span>
+      <span class="wishlist-header__owner">{{ firstName }}'s Wishlist</span>
       <span class="wishlist-header__count">1 / 4 Bought</span>
     </template>
 
@@ -33,6 +34,7 @@
 <script>
 import BaseProfile from '@/components/BaseProfile.vue'
 import WishlistItemSmall from '@/components/WishlistItemSmall.vue'
+import EventService from '@/services/EventService.js'
 
 export default {
   name: 'Profile',
@@ -40,57 +42,23 @@ export default {
     BaseProfile,
     WishlistItemSmall
   },
+  props: ['userId', 'firstName', 'shortName', 'lastName', 'profileMessage'],
   data() {
     return {
       event: null,
-      id: 8419989, //Hardcoded for now
-      wishlistItems: [
-        {
-          id: 0,
-          name: 'Mini Smart Plug That Has A long Name',
-          displayName: 'Mini Smart Plug',
-          additionalDetails: 'white',
-          estCost: 18.53,
-          url: 'http://www.google.com',
-          purchased: false
-        },
-        {
-          id: 1,
-          name: 'Essential Oils Gift Set By Pollywhirl Has A long Name',
-          additionalDetails: 'blue',
-          estCost: 50.99,
-          url: 'http://www.google.com',
-          purchased: true
-        },
-        {
-          id: 2,
-          name: 'Baseball bat',
-          additionalDetails: 'blue',
-          estCost: 50.99,
-          url: 'http://www.google.com',
-          purchased: false
-        },
-        {
-          id: 3,
-          name: 'Perfum',
-          additionalDetails: 'blue',
-          estCost: 50.99,
-          url: 'http://www.google.com',
-          purchased: true
-        },
-        {
-          id: 4,
-          name: 'Man i dont knwo but its a lot of text here',
-          additionalDetails: 'blue',
-          estCost: 50.99,
-          url: 'http://www.google.com',
-          purchased: true
-        }
-      ]
+      wishlistItems: []
     }
   },
   created() {
     // fetch data for single id
+    EventService.getUserProducts(this.userId)
+      .then(res => {
+        this.wishlistItems = [...res.data]
+        console.log('products:', [...res.data])
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 }
 </script>
