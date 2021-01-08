@@ -1,20 +1,29 @@
 <template>
-  <div class="user-wishlist__item" :class="[isPurchased ? 'is-purchased' : '']">
-    <BaseButton>
-      <template v-slot:left>
-        <span class="user-wishlist__item-name">
-          {{ name }}
-        </span>
-      </template>
-      <template v-slot:right>
-        <span class="user-wishlist__item-text">
-          Click for Details
-        </span>
-      </template>
-      <template v-slot:default>
-        <div class="user-wishlist__item-purchased-text">PURCHASED</div>
-      </template>
-    </BaseButton>
+  <div>
+    <router-link
+      class="user-wishlist__item"
+      :class="[isPurchased ? 'is-purchased' : '']"
+      :to="{
+        name: 'Product',
+        params: { name, purchased, productId, userId }
+      }"
+    >
+      <BaseButton>
+        <template v-slot:left>
+          <span class="user-wishlist__item-name">
+            {{ name }}
+          </span>
+        </template>
+        <template v-slot:right>
+          <span class="user-wishlist__item-text">
+            Click for Details
+          </span>
+        </template>
+        <template v-slot:default>
+          <div class="user-wishlist__item-purchased-text">PURCHASED</div>
+        </template>
+      </BaseButton>
+    </router-link>
   </div>
 </template>
 
@@ -34,6 +43,14 @@ export default {
     purchased: {
       type: Boolean,
       required: true
+    },
+    productId: {
+      type: Number,
+      require: true
+    },
+    userId: {
+      type: String,
+      require: true
     }
   },
   data() {
@@ -54,6 +71,8 @@ export default {
   margin: 1rem 0;
   border: 1px solid #39495c;
   border-radius: 0.5rem;
+  text-decoration: none;
+  color: #2c3e50;
 }
 
 .user-wishlist__item-name {

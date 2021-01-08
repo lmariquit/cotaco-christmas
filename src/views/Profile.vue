@@ -22,9 +22,11 @@
       <div class="user-wishlist">
         <WishlistItemSmall
           v-for="wishlistItem in wishlistItems"
-          :key="wishlistItem.key"
+          :key="wishlistItem.id"
+          :productId="wishlistItem.id"
           :name="wishlistItem.displayName || wishlistItem.name"
           :purchased="wishlistItem.purchased"
+          :userId="userId"
         />
       </div>
     </template>

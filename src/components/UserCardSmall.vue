@@ -80,6 +80,8 @@ export default {
   border: 1px solid #39495c;
   border-radius: 0.5rem;
   cursor: pointer;
+  text-decoration: none;
+  color: #2c3e50;
 }
 
 .user-card-small:hover {
