@@ -1,8 +1,18 @@
 <template>
-  <div>name: {{ product.name }}</div>
-  <div>Description: {{ product.description }}</div>
-  <div>Estimated Cost: {{ product.estCost }}</div>
-  <div>purchased: {{ product.purchased }}</div>
+  <div class="product">
+    <div class="product__name">{{ product.name }}</div>
+    <div class="product__url-btn btn--round">Buy Here</div>
+    <div class="product__cost">
+      <div class="product__cost-header">Est. Cost: $</div>
+      <div class="product__cost-amount">{{ product.estCost }}</div>
+    </div>
+    <div class="product__additional-details-header">Additional Details</div>
+    <div class="product__additional-details">{{ product.description }}</div>
+    <div class="product__bought-btn btn--round">Mark as Bought</div>
+    <div class="product__purchased-text" v-if="false">
+      CANT GET THIS V-IF TO WORK!!!
+    </div>
+  </div>
 </template>
 
 <script>
@@ -18,7 +28,7 @@ export default {
   },
   created() {
     // fetch data for a single productId
-    console.log('looking for', this.userId, this.productId)
+    // console.log('looking for', this.userId, this.productId)
     EventService.getProduct(this.userId, this.productId)
       .then(res => {
         this.product = [...res.data][0]
@@ -26,6 +36,71 @@ export default {
       .catch(error => {
         console.log(error)
       })
+
+    // // set if purchased
+    // console.log('state of isPurchased is ', this.isPurchased)
+    // console.log('state of the prop is ', this.purchased)
+    // this.isPurchased = this.purchased
+    // console.log('state of isPurchased is now ', this.isPurchased)
+    // console.log(Boolean(this.isPurchased))
   }
 }
 </script>
+
+<style scoped>
+.product {
+  position: relative;
+}
+
+.product__name {
+  font-size: 28px;
+}
+
+.product__url-btn {
+  float: left;
+  max-width: 50%;
+  margin: 1rem 0;
+  font-size: 20px;
+}
+
+.product__cost {
+  float: right;
+  display: flex;
+  flex-direction: row;
+  margin: 1rem 1.5rem 1rem 0;
+}
+
+.product__cost-header {
+  font-size: 18px;
+}
+
+.product__cost-amount {
+  justify-content: center;
+  font-size: 28px;
+}
+
+.product__additional-details-header {
+  clear: both;
+  font-size: 18px;
+}
+
+.product__additional-details {
+  padding: 0.5rem;
+  font-size: 18px;
+}
+
+.product__bought-btn {
+  margin: 1rem 0;
+  font-size: 18px;
+}
+
+.product__purchased-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  justify-content: center;
+  align-items: center;
+  font-size: 72px;
+}
+</style>
