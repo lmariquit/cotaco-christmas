@@ -10,6 +10,9 @@ export default {
   getUsers() {
     return apiClient.get('/users')
   },
+  getUser(userId) {
+    return apiClient.get(`/users/${userId}`)
+  },
   getUserProducts(userId) {
     return apiClient.get(`/products/${userId}`)
   },

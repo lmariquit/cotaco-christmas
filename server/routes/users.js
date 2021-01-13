@@ -39,6 +39,23 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+// users/:userId
+router.get('/:userId', async (req, res, next) => {
+  // console.log('getting one user')
+  // Limit what we fetch?
+  try {
+    let user = await User.findAll({
+      where: {
+        id: req.params.userId
+      }
+    })
+    // console.log('here is the user', user[0])
+    res.json(user[0])
+  } catch (err) {
+    next(err)
+  }
+})
+
 // users/remove/:userId
 router.delete('/remove/:userId', async (req, res, next) => {
   const id = req.params.userId

@@ -9,12 +9,16 @@
     </template>
 
     <template v-slot:msg-bubble>
-      <div v-if="profileMessage" class="msg-bubble">{{ profileMessage }}</div>
+      <div v-if="user.profileMessage" class="msg-bubble">
+        {{ user.profileMessage }}
+      </div>
       <div v-else class="msg-bubble">Message Bubble Here</div>
     </template>
 
     <template v-slot:user-title>
-      <span class="wishlist-header__owner">{{ firstName }}'s Wishlist</span>
+      <span class="wishlist-header__owner"
+        >{{ user.firstName }}'s Wishlist</span
+      >
       <span class="wishlist-header__count">1 / 4 Bought</span>
     </template>
 
@@ -48,11 +52,25 @@ export default {
   data() {
     return {
       event: null,
-      wishlistItems: []
+      wishlistItems: [],
+      user: {}
     }
   },
   created() {
-    // fetch data for single id
+    // fetch user data for single id
+    EventService.getUser(this.userId)
+      .then(res => {
+        // this.user.firstName = res.data.firstName
+        // this.user.lastName = res.data.lastName
+        // this.user.shortName = res.data.shortName
+        // this.user.profileMessage = res.data.profileMessage
+        this.user = res.data
+      })
+      .catch(error => {
+        console.log(error)
+      })
+
+    // fetch user product data for single id
     EventService.getUserProducts(this.userId)
       .then(res => {
         this.wishlistItems = [...res.data]
@@ -61,6 +79,13 @@ export default {
       .catch(error => {
         console.log(error)
       })
+
+    // console.log('userId is... ', this.userId)
+    // console.log('name is... ', this.user.firstName)
+    // console.log('short name is... ', this.shortName)
+    // console.log('last name is... ', this.lastName)
+    // console.log('profile message is... ', this.profileMessage)
+    // console.log('event is... ', this.event)
   }
 }
 </script>
