@@ -26,17 +26,17 @@ router.get('/:userId', async (req, res, next) => {
   }
 })
 
-// api/products/:userId/:productId
-router.get('/:userId/:productId', async (req, res, next) => {
+// api/products/single/:productId
+router.get('/single/:productId', async (req, res, next) => {
   try {
     console.log('looking...')
-    const userProduct = await Product.findAll({
+    const product = await Product.findAll({
       where: {
-        id: req.params.productId,
-        userId: req.params.userId
+        id: req.params.productId
       }
     })
-    res.json(userProduct)
+    console.log('LOOK HERE', product[0])
+    res.json(product[0])
   } catch (err) {
     next(err)
   }

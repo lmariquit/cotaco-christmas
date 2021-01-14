@@ -75,10 +75,10 @@ export default {
 .user-card-small {
   width: 90%;
   display: flex;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   padding: 0.5rem;
   border: 1px solid #39495c;
-  border-radius: 0.5rem;
+  /* border-radius: 0.5rem; */
   cursor: pointer;
   text-decoration: none;
   color: #2c3e50;
@@ -92,12 +92,17 @@ export default {
 .user-icon {
   width: 50px;
   padding: 0 1rem;
+  border: 1px solid #39495c;
+  border-radius: 3rem;
+  height: 6rem;
+  width: 4rem;
 }
 
 .user-card-small__name {
   display: flex;
   align-items: center;
-  font-size: 20px;
+  font-size: 24px;
   text-transform: capitalize;
+  margin-left: 1rem;
 }
 </style>

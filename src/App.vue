@@ -34,10 +34,9 @@ h4 {
   font-size: 20px;
 }
 
-.btn--round {
+.btn--square {
   padding: 0.5rem 2rem;
   text-align: center;
   border: 1px solid #39495c;
-  border-radius: 1.5rem;
 }
 </style>

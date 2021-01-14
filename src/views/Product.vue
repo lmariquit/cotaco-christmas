@@ -1,16 +1,20 @@
 <template>
   <div class="product">
     <div class="product__name">{{ product.name }}</div>
-    <div class="product__url-btn btn--round">Buy Here</div>
+    <a class="product__url-btn btn--square" :href="product.url">
+      Buy Here
+    </a>
     <div class="product__cost">
       <div class="product__cost-header">Est. Cost: $</div>
       <div class="product__cost-amount">{{ product.estCost }}</div>
     </div>
     <div class="product__additional-details-header">Additional Details</div>
     <div class="product__additional-details">{{ product.description }}</div>
-    <div class="product__bought-btn btn--round">Mark as Bought</div>
-    <div class="product__purchased-text" v-if="false">
-      CANT GET THIS V-IF TO WORK!!!
+    <div class="product__bought-btn btn--square" @click="markBought">
+      Mark as Bought
+    </div>
+    <div class="product__purchased-text" v-if="product.purchased">
+      BOUGHT
     </div>
   </div>
 </template>
@@ -28,21 +32,21 @@ export default {
   },
   created() {
     // fetch data for a single productId
-    // console.log('looking for', this.userId, this.productId)
-    EventService.getProduct(this.userId, this.productId)
+    EventService.getProduct(this.productId)
       .then(res => {
-        this.product = [...res.data][0]
+        this.product = res.data
+        console.log('this is the product data', this.product)
       })
       .catch(error => {
         console.log(error)
       })
 
-    // // set if purchased
-    // console.log('state of isPurchased is ', this.isPurchased)
-    // console.log('state of the prop is ', this.purchased)
-    // this.isPurchased = this.purchased
-    // console.log('state of isPurchased is now ', this.isPurchased)
-    // console.log(Boolean(this.isPurchased))
+    // set if purchased
+  },
+  methods: {
+    markBought: () => {
+      console.log('YOU BOUGHT THIS')
+    }
   }
 }
 </script>

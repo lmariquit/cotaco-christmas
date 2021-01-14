@@ -70,7 +70,7 @@ export default {
   padding-left: 1rem;
   margin: 1rem 0;
   border: 1px solid #39495c;
-  border-radius: 0.5rem;
+  /* border-radius: 0.5rem; */
   text-decoration: none;
   color: #2c3e50;
 }
