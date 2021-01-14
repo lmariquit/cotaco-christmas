@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Wishlists from '../views/Wishlists.vue'
 import Profile from '../views/Profile.vue'
+import Product from '../views/Product.vue'
 
 const routes = [
   {
@@ -28,6 +29,12 @@ const routes = [
     name: 'Profile',
     props: true,
     component: Profile
+  },
+  {
+    path: '/products/:productId',
+    name: 'Product',
+    props: true,
+    component: Product
   }
 ]
 

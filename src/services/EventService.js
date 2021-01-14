@@ -10,7 +10,13 @@ export default {
   getUsers() {
     return apiClient.get('/users')
   },
-  getUserProducts(id) {
-    return apiClient.get(`/products/${id}`)
+  getUser(userId) {
+    return apiClient.get(`/users/${userId}`)
+  },
+  getUserProducts(userId) {
+    return apiClient.get(`/products/${userId}`)
+  },
+  getProduct(productId) {
+    return apiClient.get(`/products/single/${productId}`)
   }
 }

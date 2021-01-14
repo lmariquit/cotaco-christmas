@@ -33,4 +33,10 @@
 h4 {
   font-size: 20px;
 }
+
+.btn--square {
+  padding: 0.5rem 2rem;
+  text-align: center;
+  border: 1px solid #39495c;
+}
 </style>

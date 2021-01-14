@@ -7,8 +7,12 @@ const databaseName = pkg.name + (process.env.NODE_ENV === 'test' ? '-test' : '')
 
 const db = new Sequelize('postgres://localhost:5432/ccdatabase')
 
-db.authenticate().then(() => {
-  console.log('connected to the awesome database!!!')
-})
+db.authenticate()
+  .then(() => {
+    console.log('connected to the awesome database!!!')
+  })
+  .catch(error => {
+    console.log(error)
+  })
 
 module.exports = db

@@ -12,6 +12,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+// api/products/:userId
 router.get('/:userId', async (req, res, next) => {
   try {
     const userProducts = await Product.findAll({
@@ -20,6 +21,22 @@ router.get('/:userId', async (req, res, next) => {
       }
     })
     res.json(userProducts)
+  } catch (err) {
+    next(err)
+  }
+})
+
+// api/products/single/:productId
+router.get('/single/:productId', async (req, res, next) => {
+  try {
+    console.log('looking...')
+    const product = await Product.findAll({
+      where: {
+        id: req.params.productId
+      }
+    })
+    console.log('LOOK HERE', product[0])
+    res.json(product[0])
   } catch (err) {
     next(err)
   }

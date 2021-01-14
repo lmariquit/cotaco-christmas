@@ -9,12 +9,16 @@
     </template>
 
     <template v-slot:msg-bubble>
-      <div v-if="profileMessage" class="msg-bubble">{{ profileMessage }}</div>
+      <div v-if="user.profileMessage" class="msg-bubble">
+        {{ user.profileMessage }}
+      </div>
       <div v-else class="msg-bubble">Message Bubble Here</div>
     </template>
 
     <template v-slot:user-title>
-      <span class="wishlist-header__owner">{{ firstName }}'s Wishlist</span>
+      <span class="wishlist-header__owner"
+        >{{ user.firstName }}'s Wishlist</span
+      >
       <span class="wishlist-header__count">1 / 4 Bought</span>
     </template>
 
@@ -22,9 +26,11 @@
       <div class="user-wishlist">
         <WishlistItemSmall
           v-for="wishlistItem in wishlistItems"
-          :key="wishlistItem.key"
+          :key="wishlistItem.id"
+          :productId="wishlistItem.id"
           :name="wishlistItem.displayName || wishlistItem.name"
           :purchased="wishlistItem.purchased"
+          :userId="userId"
         />
       </div>
     </template>
@@ -46,11 +52,21 @@ export default {
   data() {
     return {
       event: null,
-      wishlistItems: []
+      wishlistItems: [],
+      user: {}
     }
   },
   created() {
-    // fetch data for single id
+    // fetch user data for single id
+    EventService.getUser(this.userId)
+      .then(res => {
+        this.user = res.data
+      })
+      .catch(error => {
+        console.log(error)
+      })
+
+    // fetch user product data for single id
     EventService.getUserProducts(this.userId)
       .then(res => {
         this.wishlistItems = [...res.data]
