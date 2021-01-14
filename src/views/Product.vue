@@ -40,8 +40,6 @@ export default {
       .catch(error => {
         console.log(error)
       })
-
-    // set if purchased
   },
   methods: {
     markBought: () => {

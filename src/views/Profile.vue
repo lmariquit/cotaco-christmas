@@ -60,10 +60,6 @@ export default {
     // fetch user data for single id
     EventService.getUser(this.userId)
       .then(res => {
-        // this.user.firstName = res.data.firstName
-        // this.user.lastName = res.data.lastName
-        // this.user.shortName = res.data.shortName
-        // this.user.profileMessage = res.data.profileMessage
         this.user = res.data
       })
       .catch(error => {
@@ -79,13 +75,6 @@ export default {
       .catch(error => {
         console.log(error)
       })
-
-    // console.log('userId is... ', this.userId)
-    // console.log('name is... ', this.user.firstName)
-    // console.log('short name is... ', this.shortName)
-    // console.log('last name is... ', this.lastName)
-    // console.log('profile message is... ', this.profileMessage)
-    // console.log('event is... ', this.event)
   }
 }
 </script>
