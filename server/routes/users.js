@@ -41,7 +41,7 @@ router.get('/', async (req, res, next) => {
 
 // users/:userId
 router.get('/:userId', async (req, res, next) => {
-  console.log('getting one user', req.params.userId)
+  // console.log('getting one user', req.params.userId)
   // Limit what we fetch?
   try {
     let user = await User.findAll({
