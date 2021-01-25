@@ -17,13 +17,16 @@
 
     <template v-slot:user-title>
       <span class="wishlist-header__owner"
-        >{{ user.firstName }}'s Wishlist</span
+        >{{ user.firstName }}'s Wishlist {{ userx.firstName }}</span
       >
-      <span class="wishlist-header__count">1 / 4 Bought</span>
+      <span class="wishlist-header__count"
+        >{{ purchasedItemsLength }} / {{ wishlistLength }} Bought</span
+      >
     </template>
 
     <template v-slot:user-wishlist>
       <div class="user-wishlist">
+        {{ getItemById(4) }}
         <WishlistItemSmall
           v-for="wishlistItem in wishlistItems"
           :key="wishlistItem.id"
@@ -41,6 +44,7 @@
 import BaseProfile from '@/components/BaseProfile.vue'
 import WishlistItemSmall from '@/components/WishlistItemSmall.vue'
 import EventService from '@/services/EventService.js'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   name: 'Profile',
@@ -75,6 +79,10 @@ export default {
       .catch(error => {
         console.log(error)
       })
+  },
+  computed: {
+    ...mapGetters(['getItemById', 'wishlistLength', 'purchasedItemsLength']),
+    ...mapState(['userx'])
   }
 }
 </script>
