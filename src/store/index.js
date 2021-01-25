@@ -17,6 +17,9 @@ export default createStore({
     },
     SET_WISHLISTITEMS(state, wishlistItems) {
       state.wishlistItems = [...wishlistItems]
+    },
+    SET_ITEM(state, item) {
+      state.item = item
     }
   },
   actions: {
@@ -51,6 +54,16 @@ export default createStore({
       EventService.getUserProducts(userId)
         .then(res => {
           commit('SET_WISHLISTITEMS', res.data)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    fetchItem({ commit }, itemId) {
+      // fetch data for a single itemId
+      EventService.getProduct(itemId)
+        .then(res => {
+          commit('SET_ITEM', res.data)
         })
         .catch(error => {
           console.log(error)

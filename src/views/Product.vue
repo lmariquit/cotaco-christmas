@@ -1,46 +1,34 @@
 <template>
   <div class="product">
-    <div class="product__name">{{ product.name }}</div>
-    <a class="product__url-btn btn--square" :href="product.url">
+    <div class="product__name">{{ item.name }}</div>
+    <a class="product__url-btn btn--square" :href="item.url">
       Buy Here
     </a>
     <div class="product__cost">
       <div class="product__cost-header">Est. Cost: $</div>
-      <div class="product__cost-amount">{{ product.estCost }}</div>
+      <div class="product__cost-amount">{{ item.estCost }}</div>
     </div>
     <div class="product__additional-details-header">Additional Details</div>
-    <div class="product__additional-details">{{ product.description }}</div>
+    <div class="product__additional-details">{{ item.description }}</div>
     <div class="product__bought-btn btn--square" @click="markBought">
       Mark as Bought
     </div>
-    <div class="product__purchased-text" v-if="product.purchased">
+    <div class="product__purchased-text" v-if="item.purchased">
       BOUGHT
     </div>
   </div>
 </template>
 
 <script>
-import EventService from '@/services/EventService.js'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Product',
-  props: ['name', 'purchased', 'productId', 'userId'],
-  data() {
-    return {
-      product: []
-    }
-  },
+  props: ['productId'],
   created() {
-    // fetch data for a single productId
-    EventService.getProduct(this.productId)
-      .then(res => {
-        this.product = res.data
-        console.log('this is the product data', this.product)
-      })
-      .catch(error => {
-        console.log(error)
-      })
+    this.$store.dispatch('fetchItem', this.productId)
   },
+  computed: mapState(['item']),
   methods: {
     markBought: () => {
       console.log('YOU BOUGHT THIS')
