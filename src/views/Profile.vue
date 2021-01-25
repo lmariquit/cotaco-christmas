@@ -17,7 +17,7 @@
 
     <template v-slot:user-title>
       <span class="wishlist-header__owner"
-        >{{ user.firstName }}'s Wishlist {{ userx.firstName }}</span
+        >{{ user.firstName }}'s Wishlist</span
       >
       <span class="wishlist-header__count"
         >{{ purchasedItemsLength }} / {{ wishlistLength }} Bought</span
@@ -26,7 +26,6 @@
 
     <template v-slot:user-wishlist>
       <div class="user-wishlist">
-        {{ getItemById(4) }}
         <WishlistItemSmall
           v-for="wishlistItem in wishlistItems"
           :key="wishlistItem.id"
@@ -43,7 +42,6 @@
 <script>
 import BaseProfile from '@/components/BaseProfile.vue'
 import WishlistItemSmall from '@/components/WishlistItemSmall.vue'
-import EventService from '@/services/EventService.js'
 import { mapState, mapGetters } from 'vuex'
 
 export default {
@@ -52,37 +50,14 @@ export default {
     BaseProfile,
     WishlistItemSmall
   },
-  props: ['userId', 'firstName', 'shortName', 'lastName', 'profileMessage'],
-  data() {
-    return {
-      event: null,
-      wishlistItems: [],
-      user: {}
-    }
-  },
+  props: ['userId'],
   created() {
-    // fetch user data for single id
-    EventService.getUser(this.userId)
-      .then(res => {
-        this.user = res.data
-      })
-      .catch(error => {
-        console.log(error)
-      })
-
-    // fetch user product data for single id
-    EventService.getUserProducts(this.userId)
-      .then(res => {
-        this.wishlistItems = [...res.data]
-        console.log('products:', [...res.data])
-      })
-      .catch(error => {
-        console.log(error)
-      })
+    this.$store.dispatch('fetchUser', this.userId)
+    this.$store.dispatch('fetchWishlistItems', this.userId)
   },
   computed: {
-    ...mapGetters(['getItemById', 'wishlistLength', 'purchasedItemsLength']),
-    ...mapState(['userx'])
+    ...mapState(['user', 'users', 'wishlistItems']),
+    ...mapGetters(['getItemById', 'wishlistLength', 'purchasedItemsLength'])
   }
 }
 </script>

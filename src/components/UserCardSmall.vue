@@ -3,7 +3,7 @@
     class="user-card-small"
     :to="{
       name: 'Profile',
-      params: { userId, firstName, shortName, lastName, profileMessage }
+      params: { userId }
     }"
   >
     <BaseButton>
@@ -48,10 +48,6 @@ export default {
     lastName: {
       type: String,
       required: true
-    },
-    profileMessage: {
-      type: String,
-      required: false
     }
     // ,
     // imgSmall: {

@@ -13,7 +13,6 @@
       :firstName="user.firstName"
       :shortName="user.shortName"
       :lastName="user.lastName"
-      :profileMessage="user.profileMessage"
     />
   </div>
 </template>
@@ -22,28 +21,17 @@
 // @ is an alias to /src
 // import UserCard from '@/components/UserCard.vue'
 import UserCardSmall from '@/components/UserCardSmall.vue'
-import EventService from '@/services/EventService.js'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Wishlists',
   components: {
     UserCardSmall
   },
-  data() {
-    return {
-      users: null
-    }
-  },
   created() {
-    EventService.getUsers()
-      .then(res => {
-        this.users = res.data
-        console.log('events:', res.data)
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  }
+    this.$store.dispatch('fetchUsers')
+  },
+  computed: mapState(['users'])
 }
 </script>
 
