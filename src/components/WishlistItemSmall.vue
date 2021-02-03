@@ -5,7 +5,7 @@
       :class="[isPurchased ? 'is-purchased' : '']"
       :to="{
         name: 'Product',
-        params: { name, purchased, productId, userId }
+        params: { productId }
       }"
     >
       <BaseButton>
